@@ -1,18 +1,20 @@
-import express from 'express'
+const express = require('express')
 
 const PORT = process.env.PORT || 3000;
 
-export class ExpressServer {
-  constructor(routes, controllerAdapter) {
+class ExpressServer {
+  constructor(routes, controllerFnAdapter) {
     this.app = express()
+    this.routes = routes
+    this.controllerFnAdapter = controllerFnAdapter
   }
 
   init() {
     try {
       this.app.use(express.json())
       // this.app.use('/api', this.movieRouter.init());
-      routes.forEach(route => {
-        this.app[route.method](route.path, controllerAdapter(route.controller))
+      this.routes.forEach(route => {
+        this.app[route.method](route.path, this.controllerFnAdapter(route.fn))
       })
 
       this.app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
@@ -20,10 +22,6 @@ export class ExpressServer {
       throw new Error('Erro ao inicializar a aplicação: ' + e.message)
     }
   }
-
-  getMovieRoutes() {
-
-  }
-
-
 }
+
+module.exports = ExpressServer

@@ -1,13 +1,14 @@
-import { MongoDbConnection } from '../frameworks/database/mongodb/MongoDbConnection.js';
-import MovieRepository from '../interfaces/database/repositories/MovieRepository.js';
+// const MongoDbConnection  = require('../frameworks/database/mongodb/MongoDbConnection.js')
+// const MovieRepository = require('../interfaces/database/repositories/MovieRepository.js')
 
-export default class MovieService {
+class MovieService {
   constructor() {
-    this.db = MongoDbConnection.db
-    this.movie = new MovieRepository(this.db);
+    // this.db = MongoDbConnection.db
+    // this.movie = new MovieRepository(this.db);
   }
 
   async getAllMovies() {
+    return 'ok'
     return await this.movie.getAllMovies();
   }
 
@@ -27,3 +28,5 @@ export default class MovieService {
     return await this.movie.deleteMovie(movieId);
   }
 }
+
+module.exports = MovieService

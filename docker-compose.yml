@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  nodejs:
+    build: ./api
+    ports:
+      - "3000:3000" # Porta do Node.js
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    container_name: mongo-docker
+    ports:
+      - "27017:27017" # Porta do MongoDB
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: initialdb
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

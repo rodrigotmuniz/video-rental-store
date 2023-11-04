@@ -1,13 +1,21 @@
-import { ExpressServer } from "./express/ExpressServer";
+const MovieController  = require("../../interfaces/http/controllers/MovieController")
+const ExpressServer = require("./express/ExpressServer")
 
-
-const routes = [
-  {path: '/', method: 'get', fn: 'M'}
-]
-
-export class ServerAdapter {
+class ServerAdapter {
   constructor() {
-    this.server = new ExpressServer(routes, this.fnAdapter)
+    this.routes = this.getRoutes()
+    this.server = new ExpressServer(this.routes, this.controllerFnAdapter)
+  }
+
+  getRoutes() {
+    const controller = new MovieController()
+    return [
+      { path: '/', method: 'get', fn: controller.getAll.bind(controller) }
+    ]
+  }
+
+  init() {
+    this.server.init()
   }
 
 
@@ -16,15 +24,19 @@ export class ServerAdapter {
   }
 
 
-  fnAdapter(fn) {
-    console.log('blaaaa')
-    // return async (res, res) => {
+  controllerFnAdapter(fn) {
+    return async (req, res) => {
+      console.log(req, res)
 
+      const input = {
+        body: req.body
+      }
 
-
-
-    // }
+      const { body, statusCode } = await fn(input)
+      res.status(statusCode).json(body)
+    }
   }
 
 }
 
+module.exports = ServerAdapter

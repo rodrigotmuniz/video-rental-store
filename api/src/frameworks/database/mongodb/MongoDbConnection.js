@@ -1,6 +1,6 @@
-import { MongoClient } from "mongodb";
+const {MongoClient} = require("mongodb")
 
-export class MongoDbConnection {
+class MongoDbConnection {
 
 
   DB_URL = 'mongodb://localhost:27017';
@@ -31,3 +31,5 @@ export class MongoDbConnection {
   }
 
 }
+
+module.exports = MongoDbConnection

@@ -1,6 +1,6 @@
-import { MongoDbConnection } from "./mongodb/MongoDbConnection";
+const  MongoDbConnection  = require("./mongodb/MongoDbConnection");
 
-export class DatabaseAdapter {
+class DatabaseAdapter {
   constructor() {
     this.database = new MongoDbConnection()
   }
@@ -12,6 +12,6 @@ export class DatabaseAdapter {
   async init() {
     await this.database.init()
   }
-
-
 }
+
+module.exports = DatabaseAdapter

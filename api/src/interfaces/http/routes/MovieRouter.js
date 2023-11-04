@@ -1,5 +1,5 @@
-import express from 'express';
-import { MovieController } from '../controllers/MovieController.js';
+const express = require('express')
+const  MovieController  = require('../controllers/MovieController.js')
 
 export class MovieRouter {
   constructor() {

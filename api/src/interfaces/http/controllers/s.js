@@ -1,5 +1,3 @@
-import MovieService from "../../../usercases/MovieService";
-import { MovieController } from "./MovieController";
 
 test('bla', async () => {
   try {

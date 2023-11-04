@@ -1,0 +1,33 @@
+projeto/
+│
+├── index.js
+├── package.json
+│
+├── frameworks/
+│   ├── express/
+│   │   └── server.js
+│   │
+│   └── mongodb/
+│       └── connection.js
+│
+├── interfaces/
+│   ├── http/
+│   │   ├── ExpressRouter.js
+│   │   ├── routes/
+│   │   │   ├── userRoutes.js
+│   │   │   └── productRoutes.js
+│   │   │
+│   │   ├── UserController.js
+│   │   └── ProductController.js
+│   │
+│   └── database/
+│       ├── UserRepository.js
+│       └── ProductRepository.js
+│
+├── usecases/
+│   ├── UserUseCase.js
+│   └── ProductUseCase.js
+│
+└── entities/
+    ├── UserEntity.js
+    └── ProductEntity.js
