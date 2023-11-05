@@ -26,10 +26,7 @@ const res = {
   json: () => res
 }
 
-const getAllTypesExceptChoosenOnes = (...exceptedTypesName) => {
-  const types = ['string', 1, 0, () => {}, {}, [], null, undefined, 0, true, false]
-  return types.filter(type => getType)
-}
+
 
 
 
