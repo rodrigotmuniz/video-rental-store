@@ -1,42 +1,26 @@
-const MovieController  = require("../../interfaces/http/controllers/MovieController")
+const MovieController = require("../../interfaces/http/controllers/MovieController")
+const ExpressRouteAdapter = require("./express/ExpressRouteAdapter")
 const ExpressServer = require("./express/ExpressServer")
 
 class ServerAdapter {
   constructor() {
-    this.routes = this.getRoutes()
-    this.server = new ExpressServer(this.routes, this.controllerFnAdapter)
   }
 
-  getRoutes() {
-    const controller = new MovieController()
+  createRoutes() {
+    const { createFnAdapter } = ExpressRouteAdapter
+
+    const movieController = new MovieController()
+    const { getAll } = movieController
+
     return [
-      { path: '/', method: 'get', fn: controller.getAll.bind(controller) }
+      { path: '/:id', method: 'get', fn: createFnAdapter(movieController, getAll.name) }
     ]
   }
 
   init() {
-    this.server.init()
+    const routes = this.createRoutes()
+    ExpressServer.init(routes)
   }
-
-
-  getApis() {
-
-  }
-
-
-  controllerFnAdapter(fn) {
-    return async (req, res) => {
-      console.log(req, res)
-
-      const input = {
-        body: req.body
-      }
-
-      const { body, statusCode } = await fn(input)
-      res.status(statusCode).json(body)
-    }
-  }
-
 }
 
 module.exports = ServerAdapter

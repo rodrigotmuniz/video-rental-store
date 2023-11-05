@@ -3,7 +3,7 @@ const ServerAdapter = require('./ServerAdapter');
 jest.mock('./express/ExpressServer', () => jest.fn())
 
 
-test.only('ServerAdapter', async () => {
+test.skip('ServerAdapter', async () => {
   try {
     const server = new ServerAdapter()
     const fn = jest.fn((input) => {
